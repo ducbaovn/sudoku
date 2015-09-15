@@ -1,0 +1,6 @@
+{
+  "name": "KENGLISH: MAKING YOUR OWN FLASH CARD AND PLAYING SUDOKU",
+  "description": "Node.js app using Express 4",
+  "repository": "https://github.com/ducbaovn/sudoku",
+  "keywords": ["node", "express", "sudoku"]
+}

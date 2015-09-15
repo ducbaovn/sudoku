@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>KENGLISH</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+    </style>
+</head>
+<body>
+    <script>
+    </script>
+    <div class='container'>
+        <form action='/insert' method='post'>
+        <p style='font-size: 28px'>Lesson <input type='text' name='number'></p>
+        <p style='font-size: 28px'>Title <input type='text' name='title'></p>
+        <table class='table table-striped' style='font-size:28px'>
+            <thead>
+                <tr>
+                    <th>Vocabulary</th>
+                    <th>Meaning</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% for (var i = 0; i < 20; i ++) { %>
+                <tr>
+                    <td><input type='text' name='vocabulary'></td>
+                    <td><input type='text' name='mean'></td>
+                </tr>
+            <% } %>            
+            </tbody>
+        </table>
+        <button type='submit' class='btn btn-primary btn-lg'>INSERT</button>
+        <div style='text-align:center; font-size: 28px'><a href='/'>HOME</a></div>
+    </div>
+</body>
+</html>

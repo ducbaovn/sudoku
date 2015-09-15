@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>KENGLISH</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+    </style>
+</head>
+<body>
+    <script>
+        function route(i){
+            if (i == 0) {
+                document.getElementById('myform').action = "/lesson";
+            }
+            else document.getElementById('myform').action = "/excercise";
+        }
+    </script>
+    <div style="background-color: yellow; padding: 20px">
+    <div class='container'>
+    <form id='myform' action = '/lesson' method='post'> 
+    <% for (var i = 0; i < lesson.length; i ++) { %>
+        <div class = "row" style="background-color: yellow;">
+            <div class="col-sm-6">
+                <p style="font-family: Arial; font-size: 36px; font-weight:bold">
+                Lesson <%= lesson[i].number %>: <%= lesson[i].title %>
+                </p>
+            </div>
+            <div class="col-sm-3" style='text-align:center'>
+                <button type="submit" class="btn btn-primary btn-lg" onClick='route(0)' name='lesson' value='<%= lesson[i].number %>'>
+                Lesson <%= lesson[i].number %>
+                </button>
+            </div>
+            <div class="col-sm-3" style='text-align:center'>
+                <button type="submit" class="btn btn-success btn-lg" onClick='route(1)' name='excercise' value='<%= lesson[i].number %>'>
+                Excercise <%= lesson[i].number %>
+                </button>
+            </div>
+        </div>
+    <% } %>
+        <div class = "row" style="background-color: yellow;">
+            <div class="col-sm-6">
+                <p style="font-family: Arial; font-size: 36px; font-weight:bold">
+                SUDOKU
+                </p>
+            </div>
+            <div class="col-sm-3" style='text-align:center'>
+                <a href="/sudoku/play" class="btn btn-primary btn-lg">
+                    PLAY
+                </a>
+            </div>
+            <div class="col-sm-3" style='text-align:center'>
+                <a href="/sudoku/solve" class="btn btn-primary btn-lg">
+                    SOLVE
+                </a>
+            </div>
+        </div>
+    </form>
+    <div style='text-align:center'><a href='/insert'><button class="btn btn-danger btn-lg">INSERT LESSON</button></a></div>
+    </div>
+    </div>
+</body>
+</html>

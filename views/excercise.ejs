@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>KENGLISH</title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> <!-- load bootstrap css -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="checkCtrl">    
+  <div class='container'>
+    <h1>Excercise <%= lesson[0].number %></h2>
+    <p style='font-size: 28px'><%= lesson[0].title %></p>
+    <p ng-model="mark" style='font-size: 20px; color:red'>{{mark}}</p>
+    <div class = "row">
+      <div class="col-sm-6" style='font-size: 28px;'>
+        VOCABULARY
+      </div>
+      <div class="col-sm-6" style='font-size: 28px;'>
+        MEANING
+      </div>
+    </div>
+    <div class = "row">
+      <div class="col-sm-6">
+        <input ng-model="vocabulary" type='text' style='font-size: 50px; font-weight:bold'>
+      </div>
+      <div class="col-sm-6">
+        <input ng-model="mean" type='text' style='font-size: 50px; font-weight:bold'>
+      </div>
+    </div>
+    <p ng-hide="hide" ng-model="alert" style='font-size: 28px; font-weight:bold; color:red'>{{alert}}</p>
+    <button class='btn btn-danger btn-lg' ng-click="check()">CHECK</button>
+    <div style='text-align:center; font-size: 28px'><a href='/'>HOME</a></div>
+  </div>
+  <script>
+    var app = angular.module('myApp',[]);
+    var lesson = <%- JSON.stringify(lesson) %>;
+    var i = 0;
+    app.controller('checkCtrl', function($scope){
+      var random = Math.floor(Math.random() * 2) - 1;
+      $scope.mark = (i)+'/'+lesson.length;
+      if (random) {
+        $scope.vocabulary = lesson[i].vocabulary;
+      }
+      else {
+        $scope.mean = lesson[i].mean;   
+      }
+      $scope.check = function() {
+        if (random) {
+          if ($scope.mean.toLowerCase() == lesson[i].mean) {
+            if (i<lesson.length-1) {
+              i++;
+              $scope.mark = (i)+'/'+lesson.length;
+              $scope.hide = true;
+              random = Math.floor(Math.random() * 2) - 1;
+              if (random) {
+                $scope.vocabulary = lesson[i].vocabulary;
+                $scope.mean = '';
+              }
+              else {
+                $scope.mean = lesson[i].mean;
+                $scope.vocabulary = '';
+              }
+            }
+            else {
+              $scope.alert = 'COMPLETE!!! CLICK HOME TO SELECT NEW LESSON - EXERCISE';
+              $scope.hide = false;
+            }
+          }
+          else {
+            $scope.mean = '';
+            $scope.alert = 'WRONG';
+            $scope.hide = false;
+          }
+        }
+        else {
+          if ($scope.vocabulary.toLowerCase() == lesson[i].vocabulary) {
+            if (i<lesson.length) {
+              i++;
+              $scope.mark = (i)+'/'+lesson.length;
+              $scope.hide = true;
+              random = Math.floor(Math.random() * 2) - 1;
+              if (random) {
+                $scope.vocabulary = lesson[i].vocabulary;
+                $scope.mean = '';
+              }
+              else {
+                $scope.mean = lesson[i].mean;
+                $scope.vocabulary = '';
+              }
+            }
+            else {
+              $scope.alert = 'COMPLETE!!! CLICK HOME TO SELECT NEW LESSON - EXERCISE';
+              $scope.hide = false;
+            }
+          }
+          else {
+            $scope.vocabulary = '';
+            $scope.alert = 'WRONG';
+            $scope.hide = false;
+          }   
+        }
+      }
+    });      
+  </script>
+</body>
+</html>
